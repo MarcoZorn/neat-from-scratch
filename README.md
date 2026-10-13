@@ -127,6 +127,16 @@ evaluation is one sweep in depth order with no iteration to convergence. The
 cost is that this network cannot have memory. Recurrence is genuinely useful in
 NEAT, and leaving it out is a simplification, not an improvement.
 
+That sweep is also cheap to compile: once per mutation the network is
+flattened into typed arrays (node values in one buffer, each node's inputs a
+run of slot and weight pairs), and evaluating it is a tight loop with the
+same arithmetic in the same order, so the outputs are bit for bit what the
+straightforward version gives. In the
+[gridlock](https://github.com/MarcoZorn/gridlock) city, where the networks are
+bigger, that made whole runs 37% faster. Gridlock also tried the cheapest
+form of memory on top of this: an extra output fed back in as an input on the
+next tick. It helped a little, and is written up there.
+
 ## What the car knows
 
 ```
