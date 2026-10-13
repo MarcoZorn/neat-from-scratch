@@ -48,6 +48,7 @@ export function mutate(g, innov, rng, cfg) {
   }
   if (rng.next() < cfg.pAddConn) addConnection(g, innov, rng, cfg);
   if (rng.next() < cfg.pAddNode) addNode(g, innov, rng);
+  g.dirty();   // weights changed in place, so any compiled network is stale
   return g;
 }
 
