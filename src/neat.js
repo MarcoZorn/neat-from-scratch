@@ -31,6 +31,7 @@ export const DEFAULTS = {
   // speciation
   compatThreshold: 3.0, cDisjoint: 1.0, cWeight: 0.5, smallGenome: 20,
   targetSpecies: 8, thresholdStep: 0.3, stagnation: 18,
+  sharing: true,   // fitness sharing; turn it off to watch diversity collapse
 };
 
 export function mutate(g, innov, rng, cfg) {
@@ -173,7 +174,7 @@ export class Population {
     // structural experiment before any of them has time to pay off.
     let total = 0;
     for (const s of this.species) {
-      s.adjusted = s.members.reduce((t, g) => t + Math.max(g.fitness, 0), 0) / s.members.length;
+      s.adjusted = s.members.reduce((t, g) => t + Math.max(g.fitness, 0), 0) / (cfg.sharing ? s.members.length : 1);
       total += s.adjusted;
     }
 

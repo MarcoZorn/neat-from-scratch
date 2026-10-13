@@ -3,7 +3,9 @@
 // The brain is never handed its position, the track shape, or where the
 // finish is. It gets a fan of ray distances and its own speed, and that is
 // the entire input. Everything it does has to be built out of that.
-export const N_RAYS = 5;
+// ?rays=3 on the page tries a different number of sensors
+const query = globalThis.location ? new URLSearchParams(location.search) : null;
+export const N_RAYS = Math.max(2, Math.min(16, +query?.get("rays") || 5));
 export const N_INPUTS = N_RAYS + 1;
 export const N_OUTPUTS = 2; // steering, throttle
 

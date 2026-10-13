@@ -4,6 +4,13 @@ import { DrawnTrack, WORLD_W, WORLD_H } from "./track.js";
 import { CAR, rayAngles } from "./car.js";
 import { drawNetwork } from "./netview.js";
 import { drawSparkline } from "./sparkline.js";
+import { DEFAULTS } from "./neat.js";
+
+// The experiments in the README as links: ?sharing=0, ?addNode=0.2, ?rays=3
+// (rays are read in car.js, since the network's inputs depend on them).
+const query = new URLSearchParams(location.search);
+if (query.get("sharing") === "0") DEFAULTS.sharing = false;
+if (query.has("addNode")) DEFAULTS.pAddNode = +query.get("addNode");
 
 const ANGLES = rayAngles();
 const $ = (id) => document.getElementById(id);

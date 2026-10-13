@@ -244,12 +244,20 @@ actually get better, which is the only test here worth having.
 
 ## Things worth trying
 
-- Turn off fitness sharing and watch the population collapse to one species.
-- Drop to three sensor rays. It still learns, but it takes roughly twice as long.
+- [Turn off fitness sharing](https://marcozorn.github.io/neat-from-scratch/?sharing=0). It does not collapse to one
+  species, because the compatibility threshold keeps adjusting to hold about
+  eight, but the biggest species goes from a third of the population to
+  three fifths of it after 60 generations, and the average genetic distance
+  between two cars drops by a tenth. On tracks this easy the best car comes
+  out just as good; sharing is insurance for problems where the first idea
+  that works is not the one that goes furthest.
+- [Drop to three sensor rays](https://marcozorn.github.io/neat-from-scratch/?rays=3). It still learns: over eight seeds
+  the leader laps three tracks in a row after 4.9 generations, against 3.9
+  with five. Try `?rays=9` too.
 - Keep the same track every generation and then press New seed. The gap between
   what it scores on a memorised loop and an unseen one is the whole point.
 - Reward distance only, with no speed term, and watch cars learn to crawl.
-- Raise `pAddNode`. More structure is not better structure.
+- [Raise the rate of new nodes](https://marcozorn.github.io/neat-from-scratch/?addNode=0.3). More structure is not better structure.
 - Draw a track with one very tight hairpin and nothing else, and watch how long
   it takes the population to stop treating it as a wall.
 
