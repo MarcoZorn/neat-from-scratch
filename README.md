@@ -256,7 +256,10 @@ actually get better, which is the only test here worth having.
   without it were half as fit again, so there it is now off.
 - [Drop to three sensor rays](https://marcozorn.github.io/neat-from-scratch/?rays=3). It still learns: over eight seeds
   the leader laps three tracks in a row after 4.9 generations, against 3.9
-  with five. Try `?rays=9` too.
+  with five. Going the other way, nine rays take 3.1 and sixteen 3.0, which
+  is as fast as that measure can go: on these tracks more eyes are simply
+  better. In [gridlock](https://github.com/MarcoZorn/gridlock)'s city it is
+  the opposite, because those drivers steer by their route, not their rays.
 - Keep the same track every generation and then press New seed. The gap between
   what it scores on a memorised loop and an unseen one is the whole point.
 - Reward distance only, with no speed term, and watch cars learn to crawl.
