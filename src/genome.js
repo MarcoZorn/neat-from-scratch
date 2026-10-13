@@ -81,7 +81,7 @@ export class Genome {
     return g;
   }
 
-  dirty() { this._order = null; this._in = null; }
+  dirty() { this._order = null; this._in = null; this._net = null; }
 
   order() {
     if (!this._order) {
@@ -104,21 +104,52 @@ export class Genome {
     return this._in;
   }
 
+  // Flatten the network into typed arrays once per structural or weight
+  // change: node values live in one Float64Array, and each evaluated node
+  // has a run of (source slot, weight) pairs. Evaluating a Map-based network
+  // was a large share of every race; this is the same
+  // arithmetic in the same order, so the outputs are bit for bit the same.
+  compile() {
+    const slot = new Map();
+    for (let i = 0; i < this.nIn; i++) slot.set(i, i);
+    slot.set(this.biasId, this.nIn);
+    const order = this.order();
+    order.forEach((n, k) => slot.set(n.id, this.nIn + 1 + k));
+    const size = this.nIn + 2 + order.length;   // last slot stays zero
+    const zero = size - 1;
+    const inc = this.incoming();
+    const start = new Int32Array(order.length + 1), src = [], w = [];
+    order.forEach((n, k) => {
+      start[k] = src.length;
+      for (const c of inc.get(n.id) || []) {
+        const s = slot.get(c.inId);
+        src.push(s === undefined ? zero : s);
+        w.push(c.w);
+      }
+    });
+    start[order.length] = src.length;
+    this._net = {
+      size, start, src: Int32Array.from(src), w: Float64Array.from(w),
+      out: Int32Array.from(this.outIds.map((id) => slot.get(id) ?? zero)),
+      buf: new Float64Array(size), n: order.length,
+    };
+    return this._net;
+  }
+
   // Feed-forward pass. No cycles are possible, so this is one sweep in depth
   // order with no iteration to convergence.
   activate(inputs, out) {
-    const v = this._v || (this._v = new Map());
-    v.clear();
-    for (let i = 0; i < this.nIn; i++) v.set(i, inputs[i]);
-    v.set(this.biasId, 1);
-    const inc = this.incoming();
-    for (const node of this.order()) {
+    const net = this._net || this.compile();
+    const v = net.buf, nIn = this.nIn, { start, src, w } = net;
+    v.fill(0);
+    for (let i = 0; i < nIn; i++) v[i] = inputs[i];
+    v[nIn] = 1;
+    for (let k = 0, base = nIn + 1; k < net.n; k++) {
       let sum = 0;
-      const cs = inc.get(node.id);
-      if (cs) for (let i = 0; i < cs.length; i++) sum += cs[i].w * (v.get(cs[i].inId) || 0);
-      v.set(node.id, ACT(sum));
+      for (let j = start[k]; j < start[k + 1]; j++) sum += w[j] * v[src[j]];
+      v[base + k] = ACT(sum);
     }
-    for (let o = 0; o < this.outIds.length; o++) out[o] = v.get(this.outIds[o]) || 0;
+    for (let o = 0; o < net.out.length; o++) out[o] = v[net.out[o]];
     return out;
   }
 
