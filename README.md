@@ -250,7 +250,10 @@ actually get better, which is the only test here worth having.
   three fifths of it after 60 generations, and the average genetic distance
   between two cars drops by a tenth. On tracks this easy the best car comes
   out just as good; sharing is insurance for problems where the first idea
-  that works is not the one that goes furthest.
+  that works is not the one that goes furthest. In
+  [gridlock](https://github.com/MarcoZorn/gridlock), with the same engine on a
+  much harder problem, it turned out to be a cost instead: drivers raised
+  without it were half as fit again, so there it is now off.
 - [Drop to three sensor rays](https://marcozorn.github.io/neat-from-scratch/?rays=3). It still learns: over eight seeds
   the leader laps three tracks in a row after 4.9 generations, against 3.9
   with five. Try `?rays=9` too.
