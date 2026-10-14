@@ -275,7 +275,7 @@ actually get better, which is the only test here worth having.
   hard set, and I guessed that was its ring of eight rays seeing more of the
   road. Checked here: with nine rays, hard tracks take 13.5 generations
   with the speed sense and 13.5 without. More eyes make up for not knowing
-  your speed; with five, nothing does.)
+  your speed; five rays are not enough to.)
 - [Raise the rate of new nodes](https://marcozorn.github.io/neat-from-scratch/?addNode=0.3). More structure is not better structure.
 - Draw a track with one very tight hairpin and nothing else, and watch how long
   it takes the population to stop treating it as a wall.
