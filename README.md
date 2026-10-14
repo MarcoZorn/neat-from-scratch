@@ -272,8 +272,10 @@ actually get better, which is the only test here worth having.
   doubles the time, 44.8 against 20.8; my guess is that braking for a
   hairpin needs to know how fast you are going. (The Python
   [cars](https://github.com/MarcoZorn/cars) project barely missed it on its
-  hard set, perhaps because its ring of eight rays sees more of the road
-  than these five.)
+  hard set, and I guessed that was its ring of eight rays seeing more of the
+  road. Checked here: with nine rays, hard tracks take 13.5 generations
+  with the speed sense and 13.5 without. More eyes make up for not knowing
+  your speed; with five, nothing does.)
 - [Raise the rate of new nodes](https://marcozorn.github.io/neat-from-scratch/?addNode=0.3). More structure is not better structure.
 - Draw a track with one very tight hairpin and nothing else, and watch how long
   it takes the population to stop treating it as a wall.
