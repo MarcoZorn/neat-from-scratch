@@ -253,7 +253,10 @@ actually get better, which is the only test here worth having.
   that works is not the one that goes furthest. In
   [gridlock](https://github.com/MarcoZorn/gridlock), with the same engine on a
   much harder problem, it turned out to be a cost instead: drivers raised
-  without it were half as fit again, so there it is now off.
+  without it were half as fit again, so there it is now off. On this demo's
+  hard tracks it is the insurance it is meant to be: eight seeds take a
+  median of 15 generations to lap three tracks in a row either way, but
+  without sharing one seed took 104, and with it none took more than 51.
 - [Drop to three sensor rays](https://marcozorn.github.io/neat-from-scratch/?rays=3). It still learns: over eight seeds
   the leader laps three tracks in a row after 4.9 generations, against 3.9
   with five. Going the other way, nine rays take 3.1 and sixteen 3.0, which
