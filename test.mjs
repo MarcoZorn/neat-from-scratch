@@ -61,4 +61,16 @@ import { Track } from "./src/track.js";
   console.log("ok  cars learn to drive");
 }
 
+// a mirrored track is the same track reflected, driven the other way round
+{
+  const a = new Track(42, 0.5, false), b = new Track(42, 0.5, false, true);
+  assert(Math.abs(a.startX - b.startX) < 1e-9 && Math.abs(a.startY - b.startY) < 1e-9, "a mirrored track starts at the same point");
+  assert(Math.abs(Math.sin(a.startHeading) + Math.sin(b.startHeading)) < 1e-6 && Math.abs(Math.cos(a.startHeading) - Math.cos(b.startHeading)) < 1e-6, "and sets off reflected");
+  for (let i = 0; i < 200; i++) {
+    const x = 50 + (i * 37) % 800, y = 40 + (i * 53) % 560;
+    assert(a.contains(x, y) === b.contains(x, 2 * a.cy - y), "every point of road has its mirror image");
+  }
+  console.log("ok  mirrored tracks are reflections");
+}
+
 console.log("\nall checks passed");
