@@ -269,10 +269,11 @@ actually get better, which is the only test here worth having.
 - Take away the car's sense of its own speed (the network has no memory, so
   it then cannot know it). On easy tracks it makes no difference at all, 3.4
   generations to three laps in a row against 3.9. On hard tracks it more than
-  doubles the time, 44.8 against 20.8: braking for a hairpin needs to know
-  how fast you are going. (The Python
-  [cars](https://github.com/MarcoZorn/cars) project barely missed it, but its
-  sixteen rays see far more of the road.)
+  doubles the time, 44.8 against 20.8; my guess is that braking for a
+  hairpin needs to know how fast you are going. (The Python
+  [cars](https://github.com/MarcoZorn/cars) project barely missed it on its
+  hard set, perhaps because its ring of eight rays sees more of the road
+  than these five.)
 - [Raise the rate of new nodes](https://marcozorn.github.io/neat-from-scratch/?addNode=0.3). More structure is not better structure.
 - Draw a track with one very tight hairpin and nothing else, and watch how long
   it takes the population to stop treating it as a wall.
