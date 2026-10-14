@@ -244,6 +244,15 @@ actually get better, which is the only test here worth having.
 
 ## Things worth trying
 
+- Draw a track the other way round. Every generated track is driven the same
+  way round, so the drivers learn a one-handed skill. Six populations, 30
+  generations each, raced on twelve tracks they had not seen: 94 laps as
+  trained, 0 when the world is mirrored (left and right rays swapped,
+  steering flipped). Silencing one ray at a time shows why: without the ray
+  61 degrees to one side they lap nothing, without its twin on the other side
+  91 of 94, and without the far ray on that other side 107, more than with
+  it. They watch one side of the road.
+
 - [Turn off fitness sharing](https://marcozorn.github.io/neat-from-scratch/?sharing=0). It does not collapse to one
   species, because the compatibility threshold keeps adjusting to hold about
   eight, but the biggest species goes from a third of the population to
