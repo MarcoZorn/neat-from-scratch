@@ -6,7 +6,8 @@ import { drawNetwork } from "./netview.js";
 import { drawSparkline } from "./sparkline.js";
 import { DEFAULTS } from "./neat.js";
 
-// The experiments in the README as links: ?sharing=0, ?addNode=0.2, ?rays=3
+// The experiments in the README as links: ?sharing=0, ?addNode=0.2, ?rays=3,
+// ?speed=0, ?hard=1
 // (rays are read in car.js, since the network's inputs depend on them).
 const query = new URLSearchParams(location.search);
 if (query.get("sharing") === "0") DEFAULTS.sharing = false;
@@ -20,7 +21,7 @@ const brain = $("brain"), bctx = brain.getContext("2d");
 const spark = $("spark"), sctx = spark.getContext("2d");
 
 let world, running = true, speed = 1, showRays = true, showAll = true;
-let hard = false, drawMode = false, stroke = null, fit = { k: 1, ox: 0, oy: 0 };
+let hard = query.get("hard") === "1", drawMode = false, stroke = null, fit = { k: 1, ox: 0, oy: 0 };
 let pending = 0; // generations queued for fast-forward
 
 function fitCanvas(c, cssW, cssH) {
@@ -323,5 +324,6 @@ for (const b of document.querySelectorAll("[data-speed]")) {
 window.addEventListener("resize", layout);
 
 layout();
+$("hardmode").dataset.on = hard;
 reset(7);
 frame();

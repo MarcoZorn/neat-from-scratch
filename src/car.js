@@ -6,6 +6,8 @@
 // ?rays=3 on the page tries a different number of sensors
 const query = globalThis.location ? new URLSearchParams(location.search) : null;
 export const N_RAYS = Math.max(2, Math.min(16, +query?.get("rays") || 5));
+// ?speed=0: the car no longer feels its own speed (the input reads zero)
+const FEEL_SPEED = query?.get("speed") !== "0";
 export const N_INPUTS = N_RAYS + 1;
 export const N_OUTPUTS = 2; // steering, throttle
 
@@ -71,7 +73,7 @@ export class Car {
     if (!this.alive) return;
     this.sense(track);
     for (let i = 0; i < N_RAYS; i++) this.inputs[i] = this.rays[i] / CAR.rayRange;
-    this.inputs[N_RAYS] = this.v / CAR.maxSpeed;
+    this.inputs[N_RAYS] = FEEL_SPEED ? this.v / CAR.maxSpeed : 0;
 
     this.genome.activate(this.inputs, this.out);
     const steer = this.out[0], throttle = this.out[1];

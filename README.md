@@ -266,8 +266,8 @@ actually get better, which is the only test here worth having.
 - Keep the same track every generation and then press New seed. The gap between
   what it scores on a memorised loop and an unseen one is the whole point.
 - Reward distance only, with no speed term, and watch cars learn to crawl.
-- Take away the car's sense of its own speed (the network has no memory, so
-  it then cannot know it). On easy tracks it makes no difference at all, 3.4
+- [Take away the car's sense of its own speed](https://marcozorn.github.io/neat-from-scratch/?speed=0&hard=1)
+  (the network has no memory, so it then cannot know it). On easy tracks it makes no difference at all, 3.4
   generations to three laps in a row against 3.9. On hard tracks it more than
   doubles the time, 44.8 against 20.8; my guess is that braking for a
   hairpin needs to know how fast you are going. (The Python
