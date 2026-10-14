@@ -18,7 +18,9 @@ export const WORLD_W = 900, WORLD_H = 640;
 // radii. No polygon with hundreds of edges to test against, which is what
 // makes thousands of sensor rays per frame affordable.
 export class Track {
-  constructor(seed, difficulty = 0.3, hard = false) {
+  // `mirror` reflects the track top to bottom, so it is driven the other way
+  // round: drivers raised on one direction only cannot drive the other.
+  constructor(seed, difficulty = 0.3, hard = false, mirror = false) {
     const rng = new Rng(seed * 2654435761 + 1);
     this.kind = "polar";
     this.seed = seed;
@@ -42,6 +44,7 @@ export class Track {
     }
     this.sx = rng.range(0.85, 1.3);
     this.sy = rng.range(0.8, 1.15);
+    if (mirror) this.sy = -this.sy;
     this.widthFrac = hard ? rng.range(0.115, 0.145) : rng.range(0.15, 0.19);
     this.widthK = 2 + rng.int(hard ? 5 : 3);
     this.widthP = rng.range(0, Math.PI * 2);

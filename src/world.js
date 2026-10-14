@@ -7,11 +7,12 @@ export const TICKS_PER_GEN = 900;
 export const DT = 1 / 60;
 
 export class World {
-  constructor({ seed = 1, popSize = 120, tracks = 12, hard = false } = {}) {
+  constructor({ seed = 1, popSize = 120, tracks = 12, hard = false, bothWays = false } = {}) {
     this.pop = new Population(N_INPUTS, N_OUTPUTS, { popSize }, seed);
     this.trackSeeds = Array.from({ length: tracks }, (_, i) => seed * 100 + i);
     this.trackCount = tracks;
     this.hard = hard;
+    this.bothWays = bothWays;   // every other track mirrored, driven the other way round
     this.custom = null;
     this.history = [];
     this.newGeneration();
@@ -31,7 +32,7 @@ export class World {
   newGeneration() {
     const i = this.pop.generation % this.trackCount;
     const difficulty = i / Math.max(1, this.trackCount - 1);
-    this.track = this.custom || new Track(this.trackSeeds[i], difficulty, this.hard);
+    this.track = this.custom || new Track(this.trackSeeds[i], difficulty, this.hard, this.bothWays && i % 2 === 1);
     this.cars = this.pop.genomes.map((g) => new Car(g, this.track));
     this.tick = 0;
     this.done = false;
