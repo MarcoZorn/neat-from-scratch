@@ -252,6 +252,21 @@ actually get better, which is the only test here worth having.
   61 degrees to one side they lap nothing, without its twin on the other side
   91 of 94, and without the far ray on that other side 107, more than with
   it. They watch one side of the road.
+  [Raise them on tracks going both ways](https://marcozorn.github.io/neat-from-scratch/?bothways=1)
+  (every other track mirrored) and they learn both hands. Picking each
+  population's best generalist on four training tracks, two each way, and
+  racing it on twelve unseen tracks each way, six seeds:
+
+  | raised | laps, the usual way | laps, mirrored |
+  |---|---|---|
+  | one way round, 30 generations | 106 | 24 |
+  | both ways, 30 generations | 119 | 75 |
+  | both ways, 60 generations | 120 | 120 |
+
+  Two-handed, and no worse for it the usual way round. One trap on the way:
+  the single best score a population ever posted belongs to a one-handed
+  specialist, and racing that one instead of a generalist made both-ways
+  training look useless (59 laps forward, 1 mirrored).
 
 - [Turn off fitness sharing](https://marcozorn.github.io/neat-from-scratch/?sharing=0). It does not collapse to one
   species, because the compatibility threshold keeps adjusting to hold about
