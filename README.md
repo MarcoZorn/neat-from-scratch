@@ -304,6 +304,19 @@ actually get better, which is the only test here worth having.
 - Draw a track with one very tight hairpin and nothing else, and watch how long
   it takes the population to stop treating it as a wall.
 
+## Novelty instead of fitness
+
+Novelty search (Lehman and Stanley) scores a car not by how well it drove
+but by how different its behaviour was from everything seen before, and it
+famously beats fitness on deceptive problems, mazes where heading for the
+goal leads into a dead end. These tracks are not deceptive: getting further
+round is always the right idea. Scoring each car by the distance of its
+behaviour (where it stopped, how far round it got) from its ten nearest
+neighbours, on the hard tracks, eight seeds, generations until the leader
+laps three tracks in a row: fitness 20.8 on average, novelty 78.6, and one
+novelty run still had not done it at 300. On a problem with no trap,
+looking for the unusual is only a detour.
+
 ## Reading
 
 - Stanley and Miikkulainen, [Evolving Neural Networks through Augmenting Topologies](https://nn.cs.utexas.edu/downloads/papers/stanley.ec02.pdf) (2002), the original NEAT paper and a genuinely readable one.
