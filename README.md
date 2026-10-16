@@ -317,6 +317,24 @@ laps three tracks in a row: fitness 20.8 on average, novelty 78.6, and one
 novelty run still had not done it at 300. On a problem with no trap,
 looking for the unusual is only a detour.
 
+## Slow reactions
+
+What if every car acts on what its brain said a moment ago? Same easy
+tracks, eight seeds, generations until the leader laps three in a row:
+
+| delay | generations (mean) |
+|---|---|
+| none | 3.9 |
+| 3 ticks (0.05 s) | 4.3 |
+| 6 ticks (0.1 s) | 4.6 |
+| 12 ticks (0.2 s) | 14.9 (4 to 32) |
+| 24 ticks (0.4 s) | never, in 300 |
+
+Up to a tenth of a second, evolution hardly notices. At a fifth it takes
+four times as long but gets there. At 0.4 s, when a car at full speed
+covers over half its sight before its hands move, no run finds a driver
+in 300 generations: a cliff, not a slope. A human takes around a second.
+
 ## Reading
 
 - Stanley and Miikkulainen, [Evolving Neural Networks through Augmenting Topologies](https://nn.cs.utexas.edu/downloads/papers/stanley.ec02.pdf) (2002), the original NEAT paper and a genuinely readable one.
