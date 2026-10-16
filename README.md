@@ -333,7 +333,8 @@ tracks, eight seeds, generations until the leader laps three in a row:
 Up to a tenth of a second, evolution hardly notices. At a fifth it takes
 four times as long but gets there. At 0.4 s, when a car at full speed
 covers over half its sight before its hands move, no run finds a driver
-in 300 generations: a cliff, not a slope. A human takes around a second.
+in 300 generations. Somewhere between 0.2 and 0.4 s it stops working at
+all. A human takes around a second.
 
 ## Reading
 
