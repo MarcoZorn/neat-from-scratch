@@ -356,9 +356,17 @@ cannot easily break.
 And the champion after forty generations is worse on unseen tracks than
 the one after ten, with a third of its own mutants beating it. The
 "champion" is the best score ever seen, on whichever single track that
-generation raced. My guess is that by forty generations it is the car that
-got luckiest on its track rather than the best driver; a champion picked
-on many tracks would settle it.
+generation raced. Picking instead the best of the current population on
+twelve tracks and judging both on twelve others settles it:
+
+| generations | champion | generalist picked on 12 tracks |
+|---|---|---|
+| 10 | 1511 | 1996 |
+| 40 | 1348 | 2088 |
+
+The population keeps getting better; the record-holder does not. By forty
+generations it is the car that got luckiest on one track, and in one seed
+it scores a third of the generalist.
 
 ## Reading
 
