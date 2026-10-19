@@ -350,16 +350,15 @@ mutations each, or three) and score those. Six seeds:
 
 Two things. A brain gets sturdier as it evolves: at three generations the
 average single mutant keeps half of its parent's skill, at forty it keeps
-87%. Evolution is not only finding good drivers but drivers that mutation
-cannot easily break, which is what keeps a population from losing what it
-found.
+87%. Evolution is finding not only good drivers but drivers that mutation
+cannot easily break.
 
 And the champion after forty generations is worse on unseen tracks than
 the one after ten, with a third of its own mutants beating it. The
 "champion" is the best score ever seen, on whichever single track that
-generation raced; by forty generations it is the one that got luckiest on
-its track, not the best driver. The README's own advice (judge on many
-tracks, not one) applies to the champion too.
+generation raced. My guess is that by forty generations it is the car that
+got luckiest on its track rather than the best driver; a champion picked
+on many tracks would settle it.
 
 ## Reading
 
