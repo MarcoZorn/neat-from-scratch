@@ -368,6 +368,12 @@ The population keeps getting better; the record-holder does not. By forty
 generations it is the car that got luckiest on one track, and in one seed
 it scores a third of the generalist.
 
+Does it matter that the lucky record-holder is still bred from? It only
+fills the few places left over when species' shares are rounded. Filling
+them from this generation's best instead, twelve seeds: the generalist
+scores 2088 and 2118 (two batches of six) with the record-holder, 2177 and
+1985 without. No difference; the population does not lean on it.
+
 ## Reading
 
 - Stanley and Miikkulainen, [Evolving Neural Networks through Augmenting Topologies](https://nn.cs.utexas.edu/downloads/papers/stanley.ec02.pdf) (2002), the original NEAT paper and a genuinely readable one.
