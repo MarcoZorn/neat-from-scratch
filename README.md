@@ -374,6 +374,16 @@ them from this generation's best instead, twelve seeds: the generalist
 scores 2088 and 2118 (two batches of six) with the record-holder, 2177 and
 1985 without. No difference; the population does not lean on it.
 
+## The species threshold
+
+In the city simulator built on this code, the threshold that decides when
+two brains are different species turned out to flip between two values
+every generation, because its step (0.3) was as big as the threshold, and
+a step of 0.02 made evolution better there. Here the threshold sits
+between 1 and 3, so a step of 0.3 only makes it wander, and a smaller one
+does not help: generations to three laps in a row on the hard tracks,
+eight seeds, 20.8 at 0.3, 25.4 at 0.1, 28.8 at 0.05. It stays at 0.3.
+
 ## Reading
 
 - Stanley and Miikkulainen, [Evolving Neural Networks through Augmenting Topologies](https://nn.cs.utexas.edu/downloads/papers/stanley.ec02.pdf) (2002), the original NEAT paper and a genuinely readable one.
