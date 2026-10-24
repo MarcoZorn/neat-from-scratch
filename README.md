@@ -374,6 +374,22 @@ them from this generation's best instead, twelve seeds: the generalist
 scores 2088 and 2118 (two batches of six) with the record-holder, 2177 and
 1985 without. No difference; the population does not lean on it.
 
+## Training on the hard tracks
+
+In the Python version of this project, raising the cars on harder tracks
+made them far better on hard tracks they never saw and no worse on easy
+ones. Here, thirty generations, eight seeds, the best of each population
+picked on twelve tracks and judged on twelve others, laps out of 12:
+
+| trained on | unseen easy | unseen hard |
+|---|---|---|
+| easy tracks | 10.00 | 2.88 |
+| hard tracks | 10.75 | 3.25 |
+
+A little better on both, nothing like the gap in the Python version. The
+hard tracks here are mostly too long to lap in one generation's 900
+ticks (three in twelve, whoever drives), so this exam cannot show much.
+
 ## The species threshold
 
 In the city simulator built on this code, the threshold that decides when
