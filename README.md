@@ -387,8 +387,9 @@ picked on twelve tracks and judged on twelve others, laps out of 12:
 | hard tracks | 10.75 | 3.25 |
 
 A little better on both, nothing like the gap in the Python version. The
-hard tracks here are mostly too long to lap in one generation's 900
-ticks (three in twelve, whoever drives), so this exam cannot show much.
+hard exam is lapped three times in twelve whoever drives; my guess, not
+checked, is that most hard tracks are too long for one generation's 900
+ticks, which would leave this exam little room to show anything.
 
 ## The species threshold
 
