@@ -387,9 +387,10 @@ picked on twelve tracks and judged on twelve others, laps out of 12:
 | hard tracks | 10.75 | 3.25 |
 
 A little better on both, nothing like the gap in the Python version. The
-hard exam is lapped three times in twelve whoever drives; my guess, not
-checked, is that most hard tracks are too long for one generation's 900
-ticks, which would leave this exam little room to show anything.
+hard exam is lapped three times in twelve whoever drives. Not for lack of
+time: a hard-trained champion on the twelve unseen hard tracks laps two
+and crashes on the other ten, none still driving at the end. Thirty
+generations is simply far too few for these tracks, raised on them or not.
 
 ## The species threshold
 
