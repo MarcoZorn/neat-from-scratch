@@ -389,8 +389,8 @@ picked on twelve tracks and judged on twelve others, laps out of 12:
 A little better on both, nothing like the gap in the Python version. The
 hard exam is lapped three times in twelve whoever drives. Not for lack of
 time: a hard-trained champion on the twelve unseen hard tracks laps two
-and crashes on the other ten, none still driving at the end. Thirty
-generations is simply far too few for these tracks, raised on them or not.
+and crashes on the other ten, none still driving at the end. The limit is
+the driving, not the clock.
 
 ## The species threshold
 
