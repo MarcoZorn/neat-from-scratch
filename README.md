@@ -379,6 +379,30 @@ rate worse: 54.5 generations against 35.0 on the hard tracks, and at the
 large rate twice as long on the easy ones. Inheriting a lifetime of drift
 is inheriting drift.
 
+## Eyes that evolve
+
+The five rays are fixed: a fan from -121 to +121 degrees, 190 units long.
+Let each genome carry its own five angles and one range, inherited from the
+fitter parent and mutated a fifth of the time (angles by about 9 degrees,
+range by about 10%), starting from the fixed fan. Generations until the
+leader laps three in a row, hard tracks, sixteen seeds:
+
+| sensors | mean | worst | faster than fixed, same seed |
+|---|---|---|---|
+| fixed | 24.3 | 51 | - |
+| angles evolve | 19.0 | 45 | - |
+| angles and range evolve | 15.9 | 27 | 11 of 16 (3 slower, 2 tied) |
+
+On the easy tracks nothing changes (3.9 fixed, 4.3 and 4.9 evolving): a run
+is over in four generations, before the eyes have moved. On the hard ones,
+letting the car choose where to look and how far takes a third off the time
+and halves the worst case. The best cars' eyes do not agree on a design:
+ranges from 126 to 234, the outer rays anywhere from 95 to 180 degrees out,
+and the two rays beside the middle usually pulled in towards it, often
+unevenly (for one car -20 and +34). Seeing a little further and a little
+more of what is ahead is worth having, and there is more than one way to
+arrange it.
+
 ## How evolvable is a champion?
 
 Take the best genome after G generations, score it alone on twelve tracks
