@@ -410,6 +410,31 @@ sixteen hard seeds that version takes 18.1 generations (worst 30), faster
 than fixed eyes in 10, slower in 4. The default stays the fixed fan, which
 the easy tracks never outgrow.
 
+## Evolving the fitness function
+
+The score a car is judged by, 100 per radian of the loop covered, 400 times
+its average speed along it and 300 a lap, was set by hand. Could evolution
+find a better one? An outer loop mutates the three weights (each multiplied
+by a random factor, typically between a half and twice), runs NEAT under
+the new score on eight hard-track seeds, and keeps the change if NEAT
+reaches three laps in a row no slower. Twelve tries:
+
+| distance / speed / laps | generations, seeds 1-8 |
+|---|---|
+| 100 / 400 / 300, as written | 20.8 |
+| best of the twelve, 72 / 355 / 151 | 25.1 |
+| second best, 56 / 253 / 840 | 25.5 |
+| worst, 34 / 383 / 171 | 61.6 |
+
+None of the twelve beat the hand-set score, so it was kept, and on eight
+other seeds it gives 27.8, as before. Every change in any direction made
+evolution slower, by a fifth at best and three times at worst. Twelve tries
+of an outer loop that costs a full NEAT run per try is a small search, but
+the hand-tuned numbers sit at least in a local best. The two worst runs
+both cut the weight on distance to a third (34 and 30); my guess is that
+distance matters most because it is the only part of the score that grows
+smoothly while a car is still learning, but that is not tested.
+
 ## How evolvable is a champion?
 
 Take the best genome after G generations, score it alone on twelve tracks
