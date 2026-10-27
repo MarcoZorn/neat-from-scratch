@@ -459,6 +459,29 @@ well enough laps. What the feedback adds is four more connections at the
 start for evolution to get right (my reading of why the slow runs are
 slower, not measured).
 
+## A brain drawn from geometry
+
+HyperNEAT, in its smallest form: NEAT evolves not the driving network but a
+CPPN, a small network that is asked for the weight of each connection of the
+driver given where its two ends sit. The driver has no hidden layer; each
+ray is a node on a circle at its own angle, speed and bias sit in the
+middle, the two outputs face forward. Because its weights come from angles,
+not from a list, the same CPPN can wire a brain for any number of rays. The
+car carries nine rays; training uses only the five on the usual fan (every
+other one); then the best CPPN is raced on twelve unseen easy tracks with
+those five, and with all nine, never trained on four of them. Eight seeds:
+
+| | generations to three laps in a row | unseen laps of 12, five rays | unseen laps, nine rays, untrained |
+|---|---|---|---|
+| plain NEAT | 3.9 | 6.6 | can't: one weight per ray |
+| HyperNEAT | 6.4 | 6.1 | 7.1 |
+
+It learns more slowly, since it has to find a pattern of weights rather
+than the weights, and drives about as well. And handed four eyes it never
+had, it drives a little better, not worse, in five seeds of eight: the
+weights for the new rays come from the same rule as their neighbours'. A
+brain that does not care how many sensors it has.
+
 ## How evolvable is a champion?
 
 Take the best genome after G generations, score it alone on twelve tracks
