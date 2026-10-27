@@ -486,10 +486,17 @@ On the hard tracks it fails. Sixteen seeds: 13 never lap three hard tracks
 in a row in 300 generations (the other three take 20, 27 and 65; plain NEAT
 averages 24.3, its worst 51), and the best CPPNs lap about one unseen hard
 track in twelve with five rays, fewer with nine. This driver is a single
-layer, every ray straight to steering and throttle, and plain NEAT grows
-hidden neurons to get round hairpins and pillars; my guess, not tested, is
-that a substrate with a hidden layer would be needed here, and that the
-easy tracks never asked for one.
+layer, every ray straight to steering and throttle, while plain NEAT grows
+hidden neurons to get round hairpins and pillars, so I guessed it needed a
+hidden layer. It does not help: with eight hidden nodes on a ring between
+the rays and the outputs (the CPPN asked for weights into it and out of
+it), 12 of 16 seeds still never get there (the other four take 26, 55, 186
+and 279), and the best lap one or two unseen hard tracks in twelve. On the
+easy tracks it is worse than without: 9.8 generations, and 3.8 unseen laps
+with five rays, 5.5 with nine. Drawing weights from geometry assumes
+neighbouring rays want similar weights; a pillar in the racing line seen by
+one ray and not the next may be exactly what that cannot express (a guess,
+not tested).
 
 ## How evolvable is a champion?
 
