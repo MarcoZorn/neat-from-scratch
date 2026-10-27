@@ -358,8 +358,8 @@ runs take different paths even though nothing learns. It costs nothing on
 average. Learning does: on the easy tracks nothing to gain, on the hard
 ones a run takes half again as long at the small rate, nearly three times
 at the large one. A car has 15 seconds on a track it has never seen and
-no signal telling it whether it drove well, so plain Hebbian learning can
-only add drift to a brain that already works; what it would need is a
+no signal telling it whether it drove well, so (my reading, not tested)
+plain Hebbian learning can only add drift to a brain that already works; what it would need is a
 reward to learn from, which this rule does not have.
 
 ## How evolvable is a champion?
