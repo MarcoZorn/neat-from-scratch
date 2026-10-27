@@ -352,6 +352,8 @@ leader laps three in a row:
 | a gene, but always zero | 4.4 | 24.6 |
 | mutated by 0.002 | 4.1 | 35.0 |
 | mutated by 0.01 | 5.0 | 66.6 (one run never, in 300) |
+| 0.002, and inherited | 3.9 | 54.5 (one never) |
+| 0.01, and inherited | 9.1 | 66.1 (one never) |
 
 The second row is the control: the extra gene draws random numbers, so the
 runs take different paths even though nothing learns. It costs nothing on
@@ -361,6 +363,13 @@ at the large one. A car has 15 seconds on a track it has never seen and
 no signal telling it whether it drove well, so (my reading, not tested)
 plain Hebbian learning can only add drift to a brain that already works; what it would need is a
 reward to learn from, which this rule does not have.
+
+The last two rows are Lamarck's version: after each race the weights a car
+ended with are written back into its genome before it breeds, so its
+children start from what it learned. That is no better, and at the small
+rate worse: 54.5 generations against 35.0 on the hard tracks, and at the
+large rate twice as long on the easy ones. Inheriting a lifetime of drift
+is inheriting drift.
 
 ## How evolvable is a champion?
 
