@@ -435,6 +435,26 @@ both cut the weight on distance to a third (34 and 30); my guess is that
 distance matters most because it is the only part of the score that grows
 smoothly while a car is still learning, but that is not tested.
 
+## Memory
+
+The network is feed-forward: what a car does depends only on what it sees
+this tick. The cheapest memory is feedback, the car's own last steering and
+throttle as two more inputs (the network still has no cycles; the loop runs
+through the car). Generations until the leader laps three hard tracks in a
+row, sixteen seeds:
+
+| brain | mean | worst | against no memory, same seed |
+|---|---|---|---|
+| no memory | 24.3 | 51 | - |
+| last outputs as inputs | 35.6 | 153 | 7 faster, 7 slower, 2 tied |
+
+A coin toss seed by seed, and a longer tail: three runs take over 60
+generations, against none without memory. Nothing on these tracks needs
+remembering; the walls are all in sight, and a car that reacts to them
+well enough laps. What the feedback adds is four more connections at the
+start for evolution to get right (my reading of why the slow runs are
+slower, not measured).
+
 ## How evolvable is a champion?
 
 Take the best genome after G generations, score it alone on twelve tracks
