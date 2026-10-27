@@ -336,6 +336,32 @@ covers over half its sight before its hands move, no run finds a driver
 in 300 generations. Somewhere between 0.2 and 0.4 s it stops working at
 all. A human takes around a second.
 
+## Brains that learn while they drive
+
+Every weight here is fixed for life. A plastic brain gives each connection
+a second gene, a learning rate, which starts at zero and mutates like a
+weight; while the car drives, each weight moves every tick by its rate
+times the activity at its two ends (Hebb's rule, "cells that fire together
+wire together"), capped like the weights. Each car starts from the
+genome's weights, so what it learns dies with it. Generations until the
+leader laps three in a row:
+
+| learning rates | easy, 8 seeds | hard, 16 seeds |
+|---|---|---|
+| none (the code as it is) | 3.9 | 24.3 |
+| a gene, but always zero | 4.4 | 24.6 |
+| mutated by 0.002 | 4.1 | 35.0 |
+| mutated by 0.01 | 5.0 | 66.6 (one run never, in 300) |
+
+The second row is the control: the extra gene draws random numbers, so the
+runs take different paths even though nothing learns. It costs nothing on
+average. Learning does: on the easy tracks nothing to gain, on the hard
+ones a run takes half again as long at the small rate, nearly three times
+at the large one. A car has 15 seconds on a track it has never seen and
+no signal telling it whether it drove well, so plain Hebbian learning can
+only add drift to a brain that already works; what it would need is a
+reward to learn from, which this rule does not have.
+
 ## How evolvable is a champion?
 
 Take the best genome after G generations, score it alone on twelve tracks
