@@ -287,6 +287,10 @@ actually get better, which is the only test here worth having.
   is as fast as that measure can go: on these tracks more eyes are simply
   better. In [gridlock](https://github.com/MarcoZorn/gridlock)'s city it is
   the opposite, because those drivers steer by their route, not their rays.
+- [Let the cars choose their own eyes](https://marcozorn.github.io/neat-from-scratch/?eyes=1&hard=1):
+  each ray's angle and the sight range become genes. On hard tracks that
+  takes the leader from 24.3 generations to three laps in a row down to
+  18.1 (sixteen seeds); see "Eyes that evolve" below.
 - Keep the same track every generation and then press New seed. The gap between
   what it scores on a memorised loop and an unseen one is the whole point.
 - Reward distance only, with no speed term, and watch cars learn to crawl.
