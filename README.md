@@ -482,6 +482,15 @@ had, it drives a little better, not worse, in five seeds of eight: the
 weights for the new rays come from the same rule as their neighbours'. A
 brain that does not care how many sensors it has.
 
+On the hard tracks it fails. Sixteen seeds: 13 never lap three hard tracks
+in a row in 300 generations (the other three take 20, 27 and 65; plain NEAT
+averages 24.3, its worst 51), and the best CPPNs lap about one unseen hard
+track in twelve with five rays, fewer with nine. This driver is a single
+layer, every ray straight to steering and throttle, and plain NEAT grows
+hidden neurons to get round hairpins and pillars; my guess, not tested, is
+that a substrate with a hidden layer would be needed here, and that the
+easy tracks never asked for one.
+
 ## How evolvable is a champion?
 
 Take the best genome after G generations, score it alone on twelve tracks
