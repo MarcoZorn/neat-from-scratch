@@ -1,14 +1,15 @@
 // Ties the population to the track: run a generation, score it, evolve, repeat.
 import { Population } from "./neat.js";
 import { Track } from "./track.js";
-import { Car, N_INPUTS, N_OUTPUTS } from "./car.js";
+import { Car, CAR, N_INPUTS, N_OUTPUTS, rayAngles } from "./car.js";
 
 export const TICKS_PER_GEN = 900;
 export const DT = 1 / 60;
 
 export class World {
-  constructor({ seed = 1, popSize = 120, tracks = 12, hard = false, bothWays = false } = {}) {
-    this.pop = new Population(N_INPUTS, N_OUTPUTS, { popSize }, seed);
+  // eyes: each car's ray angles and range are genes too, starting from the fixed fan
+  constructor({ seed = 1, popSize = 120, tracks = 12, hard = false, bothWays = false, eyes = false } = {}) {
+    this.pop = new Population(N_INPUTS, N_OUTPUTS, { popSize, eyes: eyes ? { angles: rayAngles(), range: CAR.rayRange } : null }, seed);
     this.trackSeeds = Array.from({ length: tracks }, (_, i) => seed * 100 + i);
     this.trackCount = tracks;
     this.hard = hard;

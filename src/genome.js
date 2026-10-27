@@ -49,6 +49,7 @@ export class Genome {
     this.conns = new Map();     // innovation -> {inId, outId, w, on, innov}
     this.fitness = 0;
     this.adjusted = 0;
+    this.eyes = null;           // optional { angles, range }: sensors that evolve too
     this._order = null;         // cached evaluation order
     this._in = null;            // cached incoming-connection lists
   }
@@ -86,6 +87,7 @@ export class Genome {
     g.outIds = [...this.outIds];
     for (const [id, n] of this.nodes) g.nodes.set(id, { ...n });
     for (const [i, c] of this.conns) g.conns.set(i, { ...c });
+    if (this.eyes) g.eyes = { angles: [...this.eyes.angles], range: this.eyes.range };
     return g;
   }
 

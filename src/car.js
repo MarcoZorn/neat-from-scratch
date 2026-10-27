@@ -48,12 +48,15 @@ export class Car {
   // March each ray outward until it leaves the track. Coarse steps, then one
   // bisection pass to sharpen the hit, which is far cheaper than a fine march
   // and accurate enough that the car cannot feel the difference.
+  // A genome with eyes (World({ eyes: true })) looks along its own angles,
+  // as far as its own range; otherwise every car has the same fixed fan.
   sense(track) {
+    const eyes = this.genome.eyes, angles = eyes ? eyes.angles : ANGLES, range = eyes ? eyes.range : CAR.rayRange;
     for (let i = 0; i < N_RAYS; i++) {
-      const ang = this.a + ANGLES[i];
+      const ang = this.a + angles[i];
       const cx = Math.cos(ang), cy = Math.sin(ang);
-      let d = 0, hit = CAR.rayRange;
-      while (d < CAR.rayRange) {
+      let d = 0, hit = range;
+      while (d < range) {
         d += CAR.rayStep;
         if (!track.contains(this.x + cx * d, this.y + cy * d)) {
           let lo = d - CAR.rayStep, hi = d;
@@ -72,7 +75,8 @@ export class Car {
   step(track, dt) {
     if (!this.alive) return;
     this.sense(track);
-    for (let i = 0; i < N_RAYS; i++) this.inputs[i] = this.rays[i] / CAR.rayRange;
+    const range = this.genome.eyes ? this.genome.eyes.range : CAR.rayRange;
+    for (let i = 0; i < N_RAYS; i++) this.inputs[i] = this.rays[i] / range;
     this.inputs[N_RAYS] = FEEL_SPEED ? this.v / CAR.maxSpeed : 0;
 
     this.genome.activate(this.inputs, this.out);

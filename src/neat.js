@@ -32,6 +32,9 @@ export const DEFAULTS = {
   compatThreshold: 3.0, cDisjoint: 1.0, cWeight: 0.5, smallGenome: 20,
   targetSpecies: 8, thresholdStep: 0.3, stagnation: 18,
   sharing: true,   // fitness sharing; turn it off to watch diversity collapse
+  // evolving sensors: null, or the eyes every genome starts with, { angles, range };
+  // each mutation then turns a ray a fifth of the time, and zooms the range
+  eyes: null, pEye: 0.2, eyeTurn: 0.15, eyeZoom: 0.1, eyeMin: 40, eyeMax: 600,
 };
 
 export function mutate(g, innov, rng, cfg) {
@@ -46,6 +49,11 @@ export function mutate(g, innov, rng, cfg) {
     const c = rng.pick([...g.conns.values()]);
     c.on = !c.on;
     g.dirty();
+  }
+  if (g.eyes) {
+    const e = g.eyes;
+    for (let i = 0; i < e.angles.length; i++) if (rng.next() < cfg.pEye) e.angles[i] = Math.max(-Math.PI, Math.min(Math.PI, e.angles[i] + rng.normal() * cfg.eyeTurn));
+    if (rng.next() < cfg.pEye) e.range = Math.max(cfg.eyeMin, Math.min(cfg.eyeMax, e.range * Math.exp(rng.normal() * cfg.eyeZoom)));
   }
   if (rng.next() < cfg.pAddConn) addConnection(g, innov, rng, cfg);
   if (rng.next() < cfg.pAddNode) addNode(g, innov, rng);
@@ -107,6 +115,8 @@ export function crossover(a, b, rng, cfg) {
     if (cb && (!ca.on || !cb.on)) c.on = rng.next() > cfg.pInheritDisabled;
     child.conns.set(innov, c);
   }
+  // eyes come from the fitter parent, like the genes only it has
+  if (a.eyes) child.eyes = { angles: [...a.eyes.angles], range: a.eyes.range };
   return child;
 }
 
@@ -142,6 +152,7 @@ export class Population {
     this.genomes = [];
     for (let i = 0; i < this.cfg.popSize; i++) {
       const g = Genome.initial(nIn, nOut, this.innov, this.rng);
+      if (this.cfg.eyes) g.eyes = { angles: [...this.cfg.eyes.angles], range: this.cfg.eyes.range };
       mutate(g, this.innov, this.rng, this.cfg);
       this.genomes.push(g);
     }

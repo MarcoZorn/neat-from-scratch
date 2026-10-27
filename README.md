@@ -403,6 +403,13 @@ unevenly (for one car -20 and +34). Seeing a little further and a little
 more of what is ahead is worth having, and there is more than one way to
 arrange it.
 
+It is now an option: `new World({ eyes: true })`, or `?eyes=1` on the page.
+Built in, the eyes mutate with the rest of the genome, so a copied champion
+keeps its eyes unmutated, unlike in the experiment above; on the same
+sixteen hard seeds that version takes 18.1 generations (worst 30), faster
+than fixed eyes in 10, slower in 4. The default stays the fixed fan, which
+the easy tracks never outgrow.
+
 ## How evolvable is a champion?
 
 Take the best genome after G generations, score it alone on twelve tracks

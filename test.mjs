@@ -7,6 +7,7 @@ import { Population } from "./src/neat.js";
 import { Genome, Innovations } from "./src/genome.js";
 import { Rng, crossover, distance, mutate, DEFAULTS } from "./src/neat.js";
 import { Track } from "./src/track.js";
+import { CAR, rayAngles } from "./src/car.js";
 
 // networks stay acyclic and produce finite output
 {
@@ -71,6 +72,19 @@ import { Track } from "./src/track.js";
     assert(a.contains(x, y) === b.contains(x, 2 * a.cy - y), "every point of road has its mirror image");
   }
   console.log("ok  mirrored tracks are reflections");
+}
+
+// evolving eyes: every genome keeps its own, copied rather than shared, and they move
+{
+  const w = new World({ seed: 3, popSize: 40, tracks: 4, eyes: true });
+  const start = rayAngles();
+  for (let i = 0; i < 6; i++) w.runGeneration();
+  const eyes = w.pop.genomes.map((g) => g.eyes);
+  assert(eyes.every((e) => e && e.angles.length === start.length), "every genome must carry eyes");
+  assert(new Set(eyes).size === eyes.length && new Set(eyes.map((e) => e.angles)).size === eyes.length, "no two genomes may share eyes");
+  assert(eyes.some((e) => e.angles.some((a, i) => a !== start[i]) || e.range !== CAR.rayRange), "eyes must evolve");
+  assert(eyes.every((e) => e.range >= DEFAULTS.eyeMin && e.range <= DEFAULTS.eyeMax), "range stays in bounds");
+  console.log("ok  eyes are inherited, copied and mutated");
 }
 
 console.log("\nall checks passed");

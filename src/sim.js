@@ -7,7 +7,7 @@ import { drawSparkline } from "./sparkline.js";
 import { DEFAULTS } from "./neat.js";
 
 // The experiments in the README as links: ?sharing=0, ?addNode=0.2, ?rays=3,
-// ?speed=0, ?hard=1, ?bothways=1
+// ?speed=0, ?hard=1, ?bothways=1, ?eyes=1
 // (rays are read in car.js, since the network's inputs depend on them).
 const query = new URLSearchParams(location.search);
 if (query.get("sharing") === "0") DEFAULTS.sharing = false;
@@ -42,7 +42,7 @@ function layout() {
 }
 
 function reset(seed) {
-  world = new World({ seed, popSize: 120, tracks: 12, hard, bothWays: query.get("bothways") === "1" });
+  world = new World({ seed, popSize: 120, tracks: 12, hard, bothWays: query.get("bothways") === "1", eyes: query.get("eyes") === "1" });
   $("seed").textContent = seed;
 }
 
@@ -213,7 +213,7 @@ function draw() {
       vctx.strokeStyle = "rgba(110,168,255,0.4)";
       vctx.lineWidth = 1 / k;
       for (let i = 0; i < ANGLES.length; i++) {
-        const ang = lead.a + ANGLES[i], d = lead.rays[i];
+        const ang = lead.a + (lead.genome.eyes ? lead.genome.eyes.angles : ANGLES)[i], d = lead.rays[i];
         vctx.beginPath();
         vctx.moveTo(lead.x, lead.y);
         vctx.lineTo(lead.x + Math.cos(ang) * d, lead.y + Math.sin(ang) * d);
