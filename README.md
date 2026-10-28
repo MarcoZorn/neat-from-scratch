@@ -291,6 +291,19 @@ actually get better, which is the only test here worth having.
   each ray's angle and the sight range become genes. On hard tracks that
   takes the leader from 24.3 generations to three laps in a row down to
   18.1 (sixteen seeds); see "Eyes that evolve" below.
+- Race the seeds. On the hard tracks the same code takes anywhere from 6 to
+  51 generations to lap three in a row, depending only on the seed
+  (`?seed=N&hard=1`). Seeds 1 to 16, fastest first:
+
+  | generations | seeds |
+  |---|---|
+  | 6 | [2](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=2), [8](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=8) |
+  | 14-17 | [5](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=5), [1](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=1), [7](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=7), [12](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=12), [15](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=15) |
+  | 25-32 | [16](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=16), [4](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=4), [13](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=13), [14](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=14), [9](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=9), [11](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=11), [6](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=6) |
+  | 51 | [3](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=3), [10](https://marcozorn.github.io/neat-from-scratch/?hard=1&seed=10) |
+
+  The luck of the first few generations matters as much as anything you
+  could tune.
 - Keep the same track every generation and then press New seed. The gap between
   what it scores on a memorised loop and an unseen one is the whole point.
 - Reward distance only, with no speed term, and watch cars learn to crawl.

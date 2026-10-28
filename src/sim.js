@@ -7,7 +7,7 @@ import { drawSparkline } from "./sparkline.js";
 import { DEFAULTS } from "./neat.js";
 
 // The experiments in the README as links: ?sharing=0, ?addNode=0.2, ?rays=3,
-// ?speed=0, ?hard=1, ?bothways=1, ?eyes=1
+// ?speed=0, ?hard=1, ?bothways=1, ?eyes=1, ?seed=12
 // (rays are read in car.js, since the network's inputs depend on them).
 const query = new URLSearchParams(location.search);
 if (query.get("sharing") === "0") DEFAULTS.sharing = false;
@@ -325,5 +325,5 @@ window.addEventListener("resize", layout);
 
 layout();
 $("hardmode").dataset.on = hard;
-reset(7);
+reset(+query.get("seed") || 7);
 frame();
