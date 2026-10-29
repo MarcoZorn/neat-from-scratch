@@ -577,6 +577,36 @@ between 1 and 3, so a step of 0.3 only makes it wander, and a smaller one
 does not help: generations to three laps in a row on the hard tracks,
 eight seeds, 20.8 at 0.3, 25.4 at 0.1, 28.8 at 0.05. It stays at 0.3.
 
+## Taught first, then evolved
+
+Teach a car by demonstration, then let it evolve. A hand-written driver
+(steer toward the open side, throttle by the road ahead) never got round a
+hard track, so the demonstrator is a champion from another run (seed 99),
+standing in for a person. It drives twelve tracks it never saw while its
+senses and actions are recorded; every brain of a fresh population then
+starts with its direct input-to-output weights fitted to that recording by
+least squares (on atanh of the action, the output being a tanh), plus
+noise of 0.3, and evolution takes over. Generations until the leader laps
+three tracks in a row, sixteen seeds, the same seeds from scratch:
+
+| tracks | demonstrator | from scratch: mean, worst | taught: mean, worst | taught faster / slower / tied |
+|---|---|---|---|---|
+| easy | first to lap three in a row | 4.1, 6 | 3.4, 6 | 8 / 0 / 8 |
+| hard | first to lap three in a row | 24.3, 51 | 6.4, 33 | 13 / 1 / 2 |
+| hard | 150 generations old | 24.3, 51 | 17.3, 92 | 11 / 3 / 2 |
+
+Three generations is the least possible, and the first demonstrator's
+pupils make it there in nine seeds of sixteen on the hard tracks: four
+times faster on average. Yet that demonstrator laps none of the twelve
+unseen hard tracks itself, and a single fitted copy laps none either. What
+it passes on is not a lap but a way of steering (the fit explains 98% of
+its steering), and selection finishes the job. The older, better
+demonstrator teaches worse: it holds the throttle flat out all the time,
+so all it can teach is steering at full speed, and one of its seeds takes
+92 generations, longer than any run from scratch. Learn from a beginner
+who drives carefully, not from a champion who never brakes (a reading of
+three rows, one run each).
+
 ## Reading
 
 - Stanley and Miikkulainen, [Evolving Neural Networks through Augmenting Topologies](https://nn.cs.utexas.edu/downloads/papers/stanley.ec02.pdf) (2002), the original NEAT paper and a genuinely readable one.
