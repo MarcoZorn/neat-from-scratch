@@ -1,4 +1,4 @@
-// A guided tour of the live run: five short steps, each pointing at the part
+// A guided tour of the live run: six short steps, each pointing at the part
 // of the page it explains, for someone who has never seen NEAT. The run keeps
 // going underneath, so what the text describes is happening as you read it.
 
@@ -27,6 +27,11 @@ export const STEPS = [
     el: "spark",
     title: "Fitness over time",
     text: "How far the best car and the average car got, generation by generation. The track changes every generation, so this is learning to drive, not memorising one road. When two parents breed, their genes line up by an innovation number each connection got when it first appeared.",
+  },
+  {
+    el: "replay",
+    title: "Replay the tape",
+    text: "Press Mark here at any generation, let the run carry on, then press Replay, new seed: the population goes back to the mark and evolves again with fresh randomness. If it finds the same kind of driver twice, the outcome was nearly decided by the mark; if it finds a different one, it was luck along the way. This is how biologists replay the tape of life.",
   },
 ];
 
