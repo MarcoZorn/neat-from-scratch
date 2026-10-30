@@ -87,4 +87,16 @@ import { CAR, rayAngles } from "./src/car.js";
   console.log("ok  eyes are inherited, copied and mutated");
 }
 
+// a saved run carries on exactly as the original
+{
+  const a = new World({ seed: 4, popSize: 40, tracks: 4 });
+  for (let i = 0; i < 3; i++) a.runGeneration();
+  const b = World.fromJSON(JSON.parse(JSON.stringify(a)));
+  for (let i = 0; i < 3; i++) {
+    const x = a.runGeneration(), y = b.runGeneration();
+    assert(x.best === y.best && x.mean === y.mean, "a loaded run must evolve exactly as the saved one");
+  }
+  console.log("ok  a saved run carries on exactly");
+}
+
 console.log("\nall checks passed");

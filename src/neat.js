@@ -237,4 +237,24 @@ export class Population {
     }
     this.species = this.species.filter((s) => s.members.length);
   }
+
+  // A whole run as plain data: every genome, the species, the innovation
+  // numbers and the random stream, so a loaded run evolves exactly as it
+  // would have.
+  toJSON() {
+    return {
+      cfg: this.cfg, rng: this.rng.s, innov: this.innov.toJSON(), threshold: this.threshold, generation: this.generation,
+      best: this.best ? this.best.toJSON() : null, genomes: this.genomes.map((g) => g.toJSON()),
+      species: this.species.map((s) => ({ rep: s.rep.toJSON(), best: s.best, stale: s.stale })),
+    };
+  }
+  static fromJSON(j) {
+    const p = Object.create(Population.prototype);
+    p.cfg = j.cfg; p.rng = new Rng(); p.rng.s = j.rng; p.innov = Innovations.fromJSON(j.innov);
+    p.threshold = j.threshold; p.generation = j.generation;
+    p.best = j.best ? Genome.fromJSON(j.best) : null;
+    p.genomes = j.genomes.map((g) => Genome.fromJSON(g));
+    p.species = j.species.map((x) => { const sp = new Species(Genome.fromJSON(x.rep)); sp.best = x.best; sp.stale = x.stale; return sp; });
+    return p;
+  }
 }

@@ -303,6 +303,24 @@ view.addEventListener("pointerup", () => {
 });
 
 $("draw").onclick = () => setDrawMode(!drawMode);
+// a run as a file: every genome and the random stream, so it carries on exactly
+$("save").onclick = () => {
+  const url = URL.createObjectURL(new Blob([JSON.stringify(world)], { type: "application/json" }));
+  const a = Object.assign(document.createElement("a"), { href: url, download: `neat-run-gen${world.pop.generation}.json` });
+  a.click();
+  URL.revokeObjectURL(url);
+};
+$("load").onclick = () => $("loadfile").click();
+$("loadfile").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  try {
+    world = World.fromJSON(JSON.parse(await f.text()));
+    hard = !!world.hard; $("hardmode").dataset.on = hard;
+    $("seed").textContent = world.opts.seed;
+  } catch (err) { console.error("not a saved run:", err); }
+  e.target.value = "";
+};
 $("hardmode").onclick = (e) => {
   hard = !hard;
   pending = 0;

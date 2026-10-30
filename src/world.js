@@ -9,6 +9,7 @@ export const DT = 1 / 60;
 export class World {
   // eyes: each car's ray angles and range are genes too, starting from the fixed fan
   constructor({ seed = 1, popSize = 120, tracks = 12, hard = false, bothWays = false, eyes = false } = {}) {
+    this.opts = { seed, popSize, tracks, hard, bothWays, eyes };
     this.pop = new Population(N_INPUTS, N_OUTPUTS, { popSize, eyes: eyes ? { angles: rayAngles(), range: CAR.rayRange } : null }, seed);
     this.trackSeeds = Array.from({ length: tracks }, (_, i) => seed * 100 + i);
     this.trackCount = tracks;
@@ -60,6 +61,17 @@ export class World {
     });
     this.pop.evolve();
     this.newGeneration();
+  }
+
+  // A saved run: the population and its history. A drawn track is not kept.
+  toJSON() { return { v: 1, opts: this.opts, trackSeeds: this.trackSeeds, pop: this.pop.toJSON(), history: this.history }; }
+  static fromJSON(j) {
+    const w = new World(j.opts);
+    w.trackSeeds = j.trackSeeds;
+    w.pop = Population.fromJSON(j.pop);
+    w.history = j.history;
+    w.newGeneration();
+    return w;
   }
 
   runGeneration() {

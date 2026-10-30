@@ -26,6 +26,13 @@ export class Innovations {
     this.nextInnov = 0;
     this.nextNode = firstNodeId;
   }
+  toJSON() { return { conn: [...this.conn], split: [...this.split], nextInnov: this.nextInnov, nextNode: this.nextNode }; }
+  static fromJSON(j) {
+    const v = new Innovations(j.nextNode);
+    v.conn = new Map(j.conn); v.split = new Map(j.split); v.nextInnov = j.nextInnov;
+    return v;
+  }
+
   connId(inId, outId) {
     const k = `${inId}>${outId}`;
     let v = this.conn.get(k);
@@ -88,6 +95,18 @@ export class Genome {
     for (const [id, n] of this.nodes) g.nodes.set(id, { ...n });
     for (const [i, c] of this.conns) g.conns.set(i, { ...c });
     if (this.eyes) g.eyes = { angles: [...this.eyes.angles], range: this.eyes.range };
+    return g;
+  }
+
+  toJSON() {
+    return { nIn: this.nIn, nOut: this.nOut, biasId: this.biasId, outIds: this.outIds, nodes: [...this.nodes.values()], conns: [...this.conns.values()], fitness: this.fitness, eyes: this.eyes };
+  }
+  static fromJSON(j) {
+    const g = new Genome(j.nIn, j.nOut);
+    g.biasId = j.biasId; g.outIds = [...j.outIds]; g.fitness = j.fitness || 0;
+    for (const n of j.nodes) g.nodes.set(n.id, { ...n });
+    for (const c of j.conns) g.conns.set(c.innov, { ...c });
+    if (j.eyes) g.eyes = { angles: [...j.eyes.angles], range: j.eyes.range };
     return g;
   }
 
