@@ -74,6 +74,15 @@ export class World {
     return w;
   }
 
+  // Same population, new luck: a fresh random stream and fresh tracks, to ask
+  // whether evolution finds the same thing twice from here.
+  reseed(seed) {
+    this.pop.rng.s = seed >>> 0 || 1;
+    this.opts = { ...this.opts, seed };
+    this.trackSeeds = Array.from({ length: this.trackCount }, (_, i) => seed * 100 + i);
+    this.newGeneration();
+  }
+
   runGeneration() {
     while (this.step()) {}
     this.finish();

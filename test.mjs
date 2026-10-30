@@ -99,4 +99,19 @@ import { CAR, rayAngles } from "./src/car.js";
   console.log("ok  a saved run carries on exactly");
 }
 
+// replay from a mark: same population, new seed, a different road
+{
+  const a = new World({ seed: 4, popSize: 40, tracks: 4 });
+  for (let i = 0; i < 3; i++) a.runGeneration();
+  const mark = JSON.stringify(a);
+  const b = World.fromJSON(JSON.parse(mark)), c = World.fromJSON(JSON.parse(mark));
+  b.reseed(99); c.reseed(99);
+  assert(b.pop.generation === a.pop.generation && b.pop.genomes.length === a.pop.genomes.length, "reseed keeps the population");
+  const x = b.runGeneration(), y = c.runGeneration();
+  assert(x.best === y.best && x.mean === y.mean, "the same new seed gives the same replay");
+  const z = World.fromJSON(JSON.parse(mark)).runGeneration();
+  assert(z.mean !== x.mean, "a new seed must change what happens");
+  console.log("ok  replay from a mark with a new seed");
+}
+
 console.log("\nall checks passed");

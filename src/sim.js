@@ -321,6 +321,14 @@ $("loadfile").onchange = async (e) => {
   } catch (err) { console.error("not a saved run:", err); }
   e.target.value = "";
 };
+// mark a generation, keep going, then come back to it with new luck
+let mark = null;
+$("mark").onclick = () => { mark = JSON.stringify(world); $("replay").disabled = false; $("replay").textContent = `Replay gen ${world.pop.generation}, new seed`; };
+$("replay").onclick = () => {
+  world = World.fromJSON(JSON.parse(mark));
+  world.reseed((world.opts.seed * 7919 + 1) % 100000);
+  $("seed").textContent = world.opts.seed;
+};
 $("hardmode").onclick = (e) => {
   hard = !hard;
   pending = 0;
