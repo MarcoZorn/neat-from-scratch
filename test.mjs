@@ -114,4 +114,15 @@ import { CAR, rayAngles } from "./src/car.js";
   console.log("ok  replay from a mark with a new seed");
 }
 
+// the tour points at things that exist on the page
+{
+  const fs = await import("node:fs");
+  const { STEPS } = await import("./src/tour.js");
+  const page = fs.readFileSync("index.html", "utf8");
+  assert(STEPS.length >= 5, "five steps at least");
+  for (const s of STEPS) assert(page.includes(`id="${s.el}"`), `tour step "${s.title}" points at #${s.el}, which is on the page`);
+  assert(page.includes('id="tour"'), "and there is a button to start it");
+  console.log("ok  the tour points at real parts of the page");
+}
+
 console.log("\nall checks passed");

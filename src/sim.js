@@ -5,9 +5,10 @@ import { CAR, rayAngles } from "./car.js";
 import { drawNetwork } from "./netview.js";
 import { drawSparkline } from "./sparkline.js";
 import { DEFAULTS } from "./neat.js";
+import { Tour } from "./tour.js";
 
 // The experiments in the README as links: ?sharing=0, ?addNode=0.2, ?rays=3,
-// ?speed=0, ?hard=1, ?bothways=1, ?eyes=1, ?seed=12
+// ?speed=0, ?hard=1, ?bothways=1, ?eyes=1, ?seed=12, ?tour=1
 // (rays are read in car.js, since the network's inputs depend on them).
 const query = new URLSearchParams(location.search);
 if (query.get("sharing") === "0") DEFAULTS.sharing = false;
@@ -302,6 +303,9 @@ view.addEventListener("pointerup", () => {
   $("play").textContent = "Pause";
 });
 
+const tour = new Tour();
+$("tour").onclick = () => tour.start();
+if (query.get("tour") === "1") tour.start();   // ?tour=1: open with the tour, for a shared link
 $("draw").onclick = () => setDrawMode(!drawMode);
 // a run as a file: every genome and the random stream, so it carries on exactly
 $("save").onclick = () => {
